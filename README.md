@@ -17,3 +17,12 @@ Este é um projeto de backend e frontend para leitura e extração de informaç�
   - **Tailwind CSS** - Framework CSS para construção rápida e responsiva de interfaces.
 
 
+# 🚀 Como Rodar o Projeto
+
+## Passo 1: Clonar o Repositório
+
+Clone o repositório para a sua máquina local:
+
+```bash
+git clone https://github.com/Zimmer911/leitor-inteligente-notas-fiscais.git
+
