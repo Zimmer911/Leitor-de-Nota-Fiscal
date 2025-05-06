@@ -8,6 +8,7 @@ function App() {
   const [documentos, setDocumentos] = useState([]);
   const [loading, setLoading] = useState(false);
 
+  // Seleciona arquivo PDF
   const handleFileChange = (e) => {
     const selectedFile = e.target.files[0];
     if (selectedFile?.type === "application/pdf") {
@@ -19,9 +20,9 @@ function App() {
     }
   };
 
+  // Envia PDF para o backend
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     if (!file) {
       alert("Selecione um arquivo primeiro!");
       return;
@@ -44,7 +45,7 @@ function App() {
 
       if (response.ok) {
         setUploadStatus(`✅ Sucesso! Arquivo ${responseData.filename} enviado.`);
-        fetchDocumentos(); // Atualiza a lista de documentos
+        fetchDocumentos();
       } else {
         setUploadStatus("❌ Erro ao enviar o arquivo.");
       }
@@ -56,6 +57,7 @@ function App() {
     }
   };
 
+  // Busca todos os documentos do backend
   const fetchDocumentos = async () => {
     try {
       const response = await fetch("http://localhost:8000/documentos/");
@@ -66,8 +68,28 @@ function App() {
     }
   };
 
+  // Apaga todos os documentos (rota DELETE)
+  const handleApagarTudo = async () => {
+    const confirmar = window.confirm("Tem certeza que deseja apagar TODOS os documentos?");
+    if (!confirmar) return;
+
+    try {
+      const response = await fetch("http://localhost:8000/documentos/limpar/", {
+        method: "DELETE",
+      });
+
+      const result = await response.json();
+      alert(result.mensagem || "Documentos apagados com sucesso.");
+      fetchDocumentos(); // Atualiza a lista
+    } catch (error) {
+      console.error("Erro ao apagar documentos:", error);
+      alert("Erro ao tentar apagar os documentos.");
+    }
+  };
+
+  // Carrega documentos ao abrir a página
   useEffect(() => {
-    fetchDocumentos(); // Carrega todos os documentos ao abrir
+    fetchDocumentos();
   }, []);
 
   return (
@@ -95,6 +117,24 @@ function App() {
       <hr />
 
       <h3>📂 Documentos Salvos</h3>
+
+      {/* Botão para apagar tudo */}
+      <button
+        style={{
+          marginBottom: "20px",
+          backgroundColor: "#dc3545",
+          color: "#fff",
+          padding: "8px 16px",
+          border: "none",
+          cursor: "pointer",
+          borderRadius: "4px"
+        }}
+        onClick={handleApagarTudo}
+      >
+        🗑️ Apagar Todos os Documentos
+      </button>
+
+      {/* Tabela de documentos */}
       {documentos.length === 0 ? (
         <p>Nenhum documento cadastrado ainda.</p>
       ) : (
