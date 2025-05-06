@@ -2,20 +2,21 @@
 
 Este é um projeto de backend e frontend para leitura e extração de informações de Notas Fiscais em formato PDF. A aplicação permite o envio de arquivos PDF, realiza a leitura do conteúdo (texto ou imagem), extrai as informações relevantes (como CNPJ, Data, Valor Total) e armazena no banco de dados.
 
-## 🛠 Tecnologias Utilizadas
+## 💪 Tecnologias Utilizadas
 
-- **Backend**:  
-  - **FastAPI** - Framework rápido e moderno para a criação de APIs.
-  - **PyMuPDF (fitz)** - Para extração de texto de PDFs com texto embutido.
-  - **pdf2image** - Para converter PDFs com imagens em imagens.
-  - **pytesseract** - OCR (Reconhecimento Óptico de Caracteres) para PDFs baseados em imagens.
-  - **SQLite** - Banco de dados simples para armazenamento das notas extraídas.
+* **Backend**:
 
-- **Frontend**:
-  - **React** - Biblioteca para a construção da interface do usuário.
-  - **Vite** - Ferramenta de build para acelerar o desenvolvimento de projetos em React.
-  - **Tailwind CSS** - Framework CSS para construção rápida e responsiva de interfaces.
+  * **FastAPI** - Framework rápido e moderno para a criação de APIs.
+  * **PyMuPDF (fitz)** - Para extração de texto de PDFs com texto embutido.
+  * **pdf2image** - Para converter PDFs com imagens em imagens.
+  * **pytesseract** - OCR (Reconhecimento Óptico de Caracteres) para PDFs baseados em imagens.
+  * **SQLite** - Banco de dados simples para armazenamento das notas extraídas.
 
+* **Frontend**:
+
+  * **React** - Biblioteca para a construção da interface do usuário.
+  * **Vite** - Ferramenta de build para acelerar o desenvolvimento de projetos em React.
+  * **Tailwind CSS** - Framework CSS para construção rápida e responsiva de interfaces.
 
 ## 🚀 Como Rodar o Projeto
 
@@ -23,95 +24,123 @@ Este é um projeto de backend e frontend para leitura e extração de informaç�
 
 Clone o repositório para a sua máquina local:
 
+```
+git clone <URL_DO_REPOSITORIO>
+cd leitor-inteligente-notas-fiscais
+```
+
 ### Passo 2: Configuração do Backend (FastAPI)
+
 Instalar as dependências do backend:
-Navegue até a pasta do backend e instale as dependências:
 
+```bash
 cd backend
-
 pip install -r requirements.txt
+```
 
+#### Dependências utilizadas:
 
-Dependências:
+* fastapi
+* pymupdf
+* pdf2image
+* pytesseract
+* uvicorn
+* sqlalchemy
+* sqlite3 (já integrado ao Python)
 
+### Instalar o Tesseract (necessário para OCR):
 
-fastapi
+**Windows**:
 
-pymupdf
+* Baixe e instale o Tesseract OCR: [https://github.com/UB-Mannheim/tesseract/wiki](https://github.com/UB-Mannheim/tesseract/wiki)
 
-pdf2image
+**Linux**:
 
-pytesseract
-
-uvicorn
-
-sqlite3 (já integrado no Python)
-
-### 2.Instalar o Tesseract (necessário para OCR):
-
-Windows: Baixe e instale o Tesseract Installer.
-
-Linux:
+```bash
 sudo apt-get install tesseract-ocr
+```
 
-### 3.Rodar o servidor backend:
+### Rodar o servidor backend:
 
-Para rodar a aplicação backend, execute:
-
+```bash
 uvicorn main:app --reload
+```
 
-O servidor estará rodando em http://localhost:8000.
-
-
-## Passo 3: Configuração do Frontend (React)
-
-
-### 1.Instalar as dependências do frontend:
-
-Navegue até a pasta do frontend e instale as dependências:
-
-cd frontend
-npm install
-
-### 2.Rodar o servidor frontend:
-
-Para rodar o frontend com o Vite, execute:
-
-npm run dev
-
-O servidor estará rodando em http://localhost:5173.
-
-## 🧪 Passo 4: Testar a Aplicação
-
-### Backend:
-- Acesse o endpoint [http://localhost:8000](http://localhost:8000) para verificar se o backend está funcionando corretamente.
-- Envie um arquivo PDF através do frontend e veja a extração de texto sendo realizada.
-
-### Frontend:
-- Abra o navegador em [http://localhost:5173](http://localhost:5173) e faça upload de um arquivo PDF.
-- O arquivo será enviado para o backend, o texto será extraído, e os dados aparecerão na interface.
+A API estará disponível em: [http://localhost:8000](http://localhost:8000)
+Swagger: [http://localhost:8000/docs](http://localhost:8000/docs)
 
 ---
 
-## 📝 Funcionalidades
+### Passo 3: Configuração do Frontend (React)
 
-- **Envio de PDFs**: Faça upload de arquivos PDF através da interface web.
-- **Leitura de PDFs**: O sistema tenta ler PDFs com texto embutido. Se o arquivo for uma imagem (por exemplo, uma nota fiscal escaneada), o OCR (pytesseract) é aplicado para extração de texto.
-- **Extração de Dados**: Dados como CNPJ, data e valor total são extraídos utilizando expressões regulares.
-- **Armazenamento no Banco de Dados**: As informações extraídas são armazenadas no banco de dados SQLite.
+Instalar as dependências:
+
+```bash
+cd ../frontend
+npm install
+```
+
+Rodar o servidor:
+
+```bash
+npm run dev
+```
+
+Frontend disponível em: [http://localhost:5173](http://localhost:5173)
+
+---
+
+## 🥮 Testar a Aplicação
+
+### Backend:
+
+* Acesse o endpoint [http://localhost:8000](http://localhost:8000) para verificar se o backend está funcionando.
+* Utilize o Swagger em [http://localhost:8000/docs](http://localhost:8000/docs) para testar o upload.
+
+### Frontend:
+
+* Abra [http://localhost:5173](http://localhost:5173)
+* Envie um arquivo PDF
+* Veja os dados extraídos (CNPJ, data, valor) na interface
+* Visualize a lista de documentos armazenados no banco
+
+---
+
+## 📄 Funcionalidades
+
+* ✉️ **Envio de PDFs**
+* 🔍 **Leitura e OCR** automática
+* ♻️ **Extração de CNPJ, data, valor**
+* 📂 **Armazenamento no banco SQLite**
+* 📄 **Listagem dos documentos extraídos**
+* 📆 **Data de upload registrada automaticamente**
 
 ---
 
 ## 🔧 Estrutura de Diretórios
 
+```
 leitor-inteligente-notas-fiscais/
-├── backend/ # Código backend (FastAPI)
-│ ├── main.py # Arquivo principal do FastAPI
-│ ├── requirements.txt # Dependências do backend
-│ └── uploads/ # Pasta para armazenar PDFs enviados
-├── frontend/ # Código frontend (React)
-│ ├── src/
-│ ├── package.json # Dependências do frontend
-│ └── public/
-└── README.md # Este arquivo
+├── backend/               # Código backend (FastAPI)
+│   ├── main.py            # Arquivo principal do FastAPI
+│   ├── pdf_reader.py      # Extração de texto/OCR
+│   ├── extract_fields.py  # Regex para campos
+│   ├── database.py        # Configuração do banco (SQLAlchemy)
+│   ├── requirements.txt   # Dependências do backend
+│   └── uploads/           # Pasta para armazenar PDFs enviados
+├── frontend/              # Código frontend (React)
+│   ├── src/
+│   │   ├── App.jsx        # Componente principal com upload e listagem
+│   │   └── App.css        # Estilo personalizado
+│   ├── public/
+│   └── package.json       # Dependências do frontend
+└── README.md              # Este arquivo
+```
 
+---
+
+## 🚫 Observação
+
+* Certifique-se de manter o backend e frontend rodando simultaneamente.
+* Verifique o CORS se for integrar com domínios diferentes (em produção).
+* O banco de dados é local e simples (SQLite), mas pode ser substituído por PostgreSQL ou outro.
