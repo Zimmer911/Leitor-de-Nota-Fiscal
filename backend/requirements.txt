@@ -1,6 +1,9 @@
 fastapi
 uvicorn
-PyMuPDF
+pymupdf
 pdf2image
 pytesseract
 sqlalchemy
+python-multipart
+pillow
+easyocr
